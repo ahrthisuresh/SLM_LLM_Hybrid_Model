@@ -1,0 +1,7 @@
+streamlit
+python-dotenv
+accelerate
+torch         
+tiktoken
+pydantic
+jsonschema
