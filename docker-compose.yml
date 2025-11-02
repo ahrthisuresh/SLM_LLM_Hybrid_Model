@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  slm-llm-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: slm-llm-hybrid
+    ports:
+      - "8501:8501"
+    volumes:
+      # Mount models directory to persist downloaded models
+      - ./src/models:/app/src/models
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
